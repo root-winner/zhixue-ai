@@ -1,0 +1,54 @@
+# ============================================
+# 智学AI - 智能知识库对话系统 依赖清单
+# Python >= 3.10
+# 安装: pip install -r requirements.txt
+# ============================================
+
+# --- Web 框架 ---
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+python-multipart==0.0.20          # 文件上传支持
+sse-starlette==2.1.3              # Server-Sent Events 流式输出
+
+# --- AI / LLM ---
+langchain==0.3.14
+langchain-core==0.3.29
+langchain-openai==0.2.14          # OpenAI 兼容接口(支持 GPT / 通义 / 智谱 等)
+langchain-community==0.3.14
+langchain-chroma==0.1.4           # Chroma 向量数据库集成
+langchain-huggingface==0.1.2      # 本地 Embedding 模型集成
+
+# --- 向量数据库 ---
+chromadb==0.5.23
+
+# --- RAG 文档处理 ---
+pypdf==5.1.0                      # PDF 解析
+docx2txt==0.8                     # Word 文档文本提取 (Docx2txtLoader 依赖)
+python-docx==1.1.2                # Word 文档解析
+markdown==3.7                     # Markdown 解析
+unstructured==0.16.0              # Markdown/多格式文档加载
+tiktoken==0.8.0                   # Token 精确计数
+
+# --- 检索增强 ---
+rank-bm25==0.2.2                  # BM25 关键词检索 (混合检索)
+# FlagEmbedding==1.2.10           # Cross-Encoder 重排序 (可选, 取消注释安装, 需 GPU 更佳)
+
+
+# --- Embedding 模型 ---
+sentence-transformers==3.3.1      # 本地 Embedding 模型(离线可用)
+transformers==4.46.3              # 固定 4.x 避免 5.x 与 chromadb tokenizers 约束冲突
+tokenizers==0.20.3                # 满足 chromadb<=0.20.3 约束
+huggingface-hub==0.26.5           # 固定避免回溯
+
+# --- 工具与工具调用 ---
+httpx==0.28.1                     # 异步 HTTP 请求(天气/搜索工具)
+beautifulsoup4==4.12.3            # 网页解析(搜索工具)
+
+# --- 前端 ---
+streamlit==1.41.1
+
+# --- 配置与日志 ---
+pydantic==2.10.4
+pydantic-settings==2.7.0
+python-dotenv==1.0.1
+loguru==0.7.3

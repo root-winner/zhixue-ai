@@ -1,0 +1,17 @@
+# Docker 构建忽略文件
+__pycache__
+*.pyc
+*.pyo
+venv/
+.venv/
+.git/
+.gitignore
+.env
+chroma_db/
+logs/
+*.log
+*.md
+!requirements.txt
+docs/
+tests/
+.pytest_cache/

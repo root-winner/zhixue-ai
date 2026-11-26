@@ -2,19 +2,21 @@
 # 智学AI 前端 Dockerfile (Streamlit)
 # ============================================
 
-FROM python:3.11-slim AS base
+FROM docker.1ms.run/library/python:3.11-slim AS base
 
 ENV TZ=Asia/Shanghai \
     PYTHONUNBUFFERED=1 \
-    LANG=C.UTF-8
+    LANG=C.UTF-8 \
+    PIP_INDEX_URL=https://pypi.tuna.tsinghua.edu.cn/simple \
+    PIP_TRUSTED_HOST=pypi.tuna.tsinghua.edu.cn
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    curl \
+RUN sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list.d/debian.sources \
+    && sed -i 's/security.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list.d/debian.sources \
+    && apt-get update && apt-get install -y --no-install-recommends curl \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
-# 前端只需 streamlit 和 httpx
 RUN pip install --no-cache-dir streamlit==1.41.1 httpx==0.28.1
 
 COPY frontend/ ./frontend/
